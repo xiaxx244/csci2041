@@ -1,0 +1,12 @@
+### Starting build.
+# Target: redblacktree.ml.depends, tags: { extension:ml, file:redblacktree.ml, ocaml, ocamldep, quiet }
+ocamldep.opt -modules redblacktree.ml > redblacktree.ml.depends # cached
+# Target: ordered.ml.depends, tags: { extension:ml, file:ordered.ml, ocaml, ocamldep, quiet }
+ocamldep.opt -modules ordered.ml > ordered.ml.depends
+# Target: ordered.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:ordered.cmo, file:ordered.ml, implem, ocaml, quiet }
+ocamlc.opt -c -o ordered.cmo ordered.ml
+# Target: redblacktree.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:redblacktree.cmo, file:redblacktree.ml, implem, ocaml, quiet }
+ocamlc.opt -c -o redblacktree.cmo redblacktree.ml
+# Target: redblacktree.byte, tags: { byte, dont_link_with, extension:byte, file:redblacktree.byte, link, ocaml, program, quiet }
+ocamlc.opt ordered.cmo redblacktree.cmo -o redblacktree.byte
+# Compilation successful.

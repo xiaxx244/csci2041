@@ -1,0 +1,24 @@
+### Starting build.
+# Target: useInterval.ml.depends, tags: { extension:ml, file:useInterval.ml, ocaml, ocamldep, quiet }
+ocamldep.opt -modules useInterval.ml > useInterval.ml.depends
+# Target: floatInterval.ml.depends, tags: { extension:ml, file:floatInterval.ml, ocaml, ocamldep, quiet }
+ocamldep.opt -modules floatInterval.ml > floatInterval.ml.depends
+# Target: intervals.ml.depends, tags: { extension:ml, file:intervals.ml, ocaml, ocamldep, quiet }
+ocamldep.opt -modules intervals.ml > intervals.ml.depends
+# Target: intervals.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:intervals.cmo, file:intervals.ml, implem, ocaml, quiet }
+ocamlc.opt -c -o intervals.cmo intervals.ml
+# Target: intInterval.ml.depends, tags: { extension:ml, file:intInterval.ml, ocaml, ocamldep, quiet }
+ocamldep.opt -modules intInterval.ml > intInterval.ml.depends
+# Target: rationalInterval.ml.depends, tags: { extension:ml, file:rationalInterval.ml, ocaml, ocamldep, quiet }
+ocamldep.opt -modules rationalInterval.ml > rationalInterval.ml.depends
+# Target: floatInterval.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:floatInterval.cmo, file:floatInterval.ml, implem, ocaml, quiet }
+ocamlc.opt -c -o floatInterval.cmo floatInterval.ml
+# Target: intInterval.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:intInterval.cmo, file:intInterval.ml, implem, ocaml, quiet }
+ocamlc.opt -c -o intInterval.cmo intInterval.ml
+# Target: rationalInterval.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:rationalInterval.cmo, file:rationalInterval.ml, implem, ocaml, quiet }
+ocamlc.opt -c -o rationalInterval.cmo rationalInterval.ml
+# Target: useInterval.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:useInterval.cmo, file:useInterval.ml, implem, ocaml, quiet }
+ocamlc.opt -c -o useInterval.cmo useInterval.ml
+# Target: useInterval.byte, tags: { byte, dont_link_with, extension:byte, file:useInterval.byte, link, ocaml, program, quiet }
+ocamlc.opt intervals.cmo floatInterval.cmo intInterval.cmo rationalInterval.cmo useInterval.cmo -o useInterval.byte
+# Compilation successful.

@@ -1,0 +1,84 @@
+name:Youya Xia
+x500:xiaxx244
+ID:5195609
+2.
+(1):
+andl (true::false::true::true::[])
+call by value:
+=foldl and true (true::false::true::true::[])
+=foldl and (and true true) (false::true::true::[])
+=foldl and (if true then true else false) (false::true::true::[])
+=foldl and true (false::true::true::[])
+=foldl and (and true false)(true::true::[])
+=foldl and (if true then false else false)(true::true::[])
+=foldl and false (true::true::[])
+=foldl and (and false true)(true::[])
+=foldl and (if false then true else false)(true::[])
+=foldl and false (true::[])
+=foldl and (and false true)[]
+=foldl and (if false then true else false) []
+=foldl and false []
+=false
+call by name:
+=foldl and true (true::false::true::true::[])
+=foldl and (and true true) (false::true::true::[])
+=foldl and (and (and true true) false) (true::true::[])
+=foldl and (and (and (and true true) false) true) (true::[])
+=foldl and (and(and (and (and true true) false) true)) true) []
+=and (and (and (and true true) false) true) true
+=and (and (and (if true then true else false) false) true) true
+=and (and (and true false) true) true
+=and (and (if true then false else false) true) true
+=and (and false true) true
+=and (if false then true else false) true
+=and false true
+=if false then true else false
+=false
+(2):
+call by value:
+andr(true::false::true::true::[])
+=foldr and (true::false::true::true::[]) true
+=and true (foldr and (false::true::true::[]) true)
+=and true (and false (foldr and (true::true::[]) true))
+=and true (and false(and true(foldr and (true::[]) true)))
+=and true(and false(and true(and true(foldr and [] true))))
+=and true(and false(and true(and true true)))
+=and true(and false (and true(if true then true else false)))
+=and true(and false (and true true))
+=and true(and false(if true then true else false))
+=and true(and false true)
+and true (if false then true else false)
+=and true false
+=if true then false else false
+=false
+call by name:
+andr (true::false::true::true::[])
+=foldr and (true::false::true::true::[]) true
+=and true (foldr and (false::true::true::[]) true)
+=if true then (foldr and (false::true::true::[]) true) else false
+=foldr and (false::true::true::[]) true
+=and false (foldr and (true::true:[]) true)
+=if false then (foldr and (true::true:[]) true) else false
+=false
+
+Reasoning:
+(1):not using lazy evaluation:
+because using lazy evaluation can not help us to reduce the number of steps in
+call by name semantics(i.e. ,there are not repetitive steps when doing
+call by name so we can not store the value of the precomputed results
+using lazy evaluation)
+
+(2):efficiency:call by name and andr is the most efficient way:
+since unlike foldl(the predicate in the add function is the
+accumulative results of the previous calls of foldl,so we need to evaluate
+the whole accumulative value to
+determine whether or not the accumulative value is true),
+in the foldr, the predicate in the add function is just the element
+we are currently looking at.So, if we use call by name semantics,
+when we encounter a false value,
+we can just return false directly by the definition of
+the add function provided in the question.
+Therefore, in the average case, as long as there is a false value in the middle
+or at the head of the list, we do not need to evaluate the whole list
+in order to determine the boolean value of addr.
+So,addr and call by name is the most efficient way.
